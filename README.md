@@ -1,12 +1,47 @@
-# CosmosTest
-Test different ways of connecting to a cosmos DB
+# Cosmos Connection Benchmark Testing
+
+## Test different ways of connecting to a cosmos DB
+
+Testing methods:
+
+1) Using DocumentDB (Slow!!)
+2) Using EF (Fast but difficult to work with dynamic data)
+3) CosmosDB Library
+
+## Important Metrics
+
+1) Time
+2) Memory Useage
+
+## How to run the code
+
+### Set up the appropriate connection strings in each file 
+
+1) CosmosLibToCosmos.cs
+2) DocumentClientToCosmos.cs
+3) EFCoreToCosmos.cs
+
+### Build the application under the Release configuration
+
+### Run Powershell as Admin
+
+1) Navigate to the CosmosTest directory
+2) Run the following command:  dotnet run --configuration Release
 
 
-|            Method |     Mean |    Error |   StdDev |     Gen 0 | Completed Work Items | Lock Contentions | Allocated native memory | Native memory leak |     Gen 1 |     Gen 2 | Allocated |
-|------------------ |---------:|---------:|---------:|----------:|---------------------:|-----------------:|------------------------:|-------------------:|----------:|----------:|----------:|
-| UseDocumentClient | 18.531 s | 0.3559 s | 0.3329 s | 7000.0000 |             382.0000 |           1.0000 |                    0 MB |                  - | 2000.0000 |         - |     48 MB |
-|      UseCosmosLib |  2.344 s | 0.0452 s | 0.0444 s | 5000.0000 |              87.0000 |           1.0000 |                    0 MB |                  - | 3000.0000 | 1000.0000 |     33 MB |
-|         UseEFCore |  1.598 s | 0.0278 s | 0.0247 s | 9000.0000 |              51.0000 |                - |                    0 MB |               0 MB | 3000.0000 |         - |     60 MB |
+After following these instructions, you should see benchmark testing in powershell. The DocumentClient takes quite a while for larger data sets. The CosmosLib and EFCore for Cosmos lib are much faster.
+
+## Results
+
+The below results are across one partition and pull around 17000 documents. </br>
+*Note: The first time for EF Core took over 4 seconds*
+
+
+|            Method |     Mean |    Error |   StdDev  |     Gen 0 | Completed Work Items | Lock Contentions | Allocated native memory | Native memory leak |     Gen 1 |     Gen 2 | Allocated |
+|------------------ |---------:|---------:|----------:|----------:|---------------------:|-----------------:|------------------------:|-------------------:|----------:|----------:|----------:|
+| UseDocumentClient | 18.531 s | 0.3559 s | 0.3329 s  | 7000.0000 |             382.0000 |           1.0000 |                    0 MB |                  - | 2000.0000 |         - |     48 MB |
+|      UseCosmosLib |  2.344 s | 0.0452 s | 0.0444 s  | 5000.0000 |              87.0000 |           1.0000 |                    0 MB |                  - | 3000.0000 | 1000.0000 |     33 MB |
+|         UseEFCore |  1.598 s | 0.0278 s | 0.0247 s  | 9000.0000 |              51.0000 |                - |                    0 MB |               0 MB | 3000.0000 |         - |     60 MB |
 
 
 // * Hints *
