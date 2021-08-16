@@ -52,30 +52,18 @@ Outliers
 
   CosmosRepo.UseEFCore: Default         -> 1 outlier  was  removed, 2 outliers were detected (1.55 s, 1.66 s)
 
+|        Term |      Definition |
+|------------:|----------------:|
+|        Mean             |  Arithmetic mean of all measurements                                                                 |
+|       Error             |  Half of 99.9% confidence interval                                                                   |
+|      StdDev             |   Standard deviation of all measurements                                                             |
+|      Gen 0              | GC Generation 0 collects per 1000 operations                                                         |
+| Completed Work Items    | The number of work items that have been processed in ThreadPool (per single operation)               |
+| Lock Contentions        | The number of times there was contention upon trying to take a Monitor's lock (per single operation) |
+| Allocated native memory | Allocated native memory per single operation                                                         |
+| Native memory leak      | Native memory leak size in byte.                                                                     |
+| Gen 1                   | GC Generation 1 collects per 1000 operations                                                         |
+| Gen 2                   | GC Generation 2 collects per 1000 operations                                                         |
+| Allocated               | Allocated memory per single operation (managed only, inclusive, 1KB = 1024B)                         |
+                                   
  
-
-// * Legends *
-
-  Mean                    : Arithmetic mean of all measurements
-
-  Error                   : Half of 99.9% confidence interval
-
-  StdDev                  : Standard deviation of all measurements
-
-  Gen 0                   : GC Generation 0 collects per 1000 operations
-
-  Completed Work Items    : The number of work items that have been processed in ThreadPool (per single operation)
-
- Lock Contentions        : The number of times there was contention upon trying to take a Monitor's lock (per single operation)
-
-  Allocated native memory : Allocated native memory per single operation
-
-  Native memory leak      : Native memory leak size in byte.
-
-  Gen 1                   : GC Generation 1 collects per 1000 operations
-
-  Gen 2                   : GC Generation 2 collects per 1000 operations
-
-  Allocated               : Allocated memory per single operation (managed only, inclusive, 1KB = 1024B)
-
-  1 s                     : 1 Second (1 sec)
