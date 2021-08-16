@@ -1,17 +1,13 @@
 # CosmosTest
 Test different ways of connecting to a cosmos DB
 
+
 |            Method |     Mean |    Error |   StdDev |     Gen 0 | Completed Work Items | Lock Contentions | Allocated native memory | Native memory leak |     Gen 1 |     Gen 2 | Allocated |
-
 |------------------ |---------:|---------:|---------:|----------:|---------------------:|-----------------:|------------------------:|-------------------:|----------:|----------:|----------:|
-
 | UseDocumentClient | 18.531 s | 0.3559 s | 0.3329 s | 7000.0000 |             382.0000 |           1.0000 |                    0 MB |                  - | 2000.0000 |         - |     48 MB |
-
 |      UseCosmosLib |  2.344 s | 0.0452 s | 0.0444 s | 5000.0000 |              87.0000 |           1.0000 |                    0 MB |                  - | 3000.0000 | 1000.0000 |     33 MB |
-
 |         UseEFCore |  1.598 s | 0.0278 s | 0.0247 s | 9000.0000 |              51.0000 |                - |                    0 MB |               0 MB | 3000.0000 |         - |     60 MB |
 
- 
 
 // * Hints *
 
