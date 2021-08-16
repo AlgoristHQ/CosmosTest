@@ -1,23 +1,21 @@
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.Azure.WebJobs;
-using Microsoft.Azure.WebJobs.Extensions.Http;
-using Microsoft.AspNetCore.Http;
+using Microsoft.Azure.Functions.Worker;
+using Microsoft.Azure.Functions.Worker.Http;
 using Microsoft.Extensions.Logging;
-using BenchmarkDotNet.Running;
 
 namespace CosmosTest
 {
     public class Function1
     {
-        [FunctionName("ConnectionMethodsTest")]
-        public async Task<IActionResult> Run(
-            [HttpTrigger(AuthorizationLevel.Function, "get", "post", Route = null)] HttpRequest req,
-            ILogger log)
+        [Function("ConnectionMethodsTest")]
+        public async Task<HttpResponseData> Run([HttpTrigger(AuthorizationLevel.Function, "get", "post")] HttpRequestData req,
+            FunctionContext executionContext)
         {
-            var summary = BenchmarkRunner.Run<CosmosRepo>();
-
-            return new OkObjectResult("");
+            var results = new CosmosRepo().UseDocumentClient();
+            var response = req.CreateResponse();
+            response.Headers.Add("Content-Type", "text/plain; charset=utf-8");
+            response.WriteString("Let's do some Cosmos!!");
+            return response;
         }
     }
 }

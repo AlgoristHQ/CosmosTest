@@ -9,6 +9,7 @@ namespace CosmosTest.CosmosLib
         private readonly string _endpoint = "";
         private readonly string _authkey = "";
         private readonly string _cosmosDatabaseId = "";
+        private readonly string _containerId = "";
         private readonly string _partitionKeyPath = "/partitionKeyPath";
         private readonly string _query = "SELECT c.Id, c.Name, c.Type FROM c";
         public async Task<List<CosmosDocumentType>> GetAll()
@@ -17,13 +18,14 @@ namespace CosmosTest.CosmosLib
             using (CosmosClient client = new CosmosClient(_endpoint, _authkey))
             {
                 var cosmosDb = await client.CreateDatabaseIfNotExistsAsync(_cosmosDatabaseId);
-                Container container = await GetOrCreateContainerAsync(cosmosDb, _cosmosDatabaseId);
+                Container container = await GetOrCreateContainerAsync(cosmosDb, _containerId);
                 QueryDefinition query = new QueryDefinition(_query);
                 using (FeedIterator<CosmosDocumentType> resultSetIterator = container.GetItemQueryIterator<CosmosDocumentType>(
                     query,
                     requestOptions: new QueryRequestOptions()
                     {
-                        PartitionKey = new PartitionKey(partitionKeyValue: true)
+                        PartitionKey = new PartitionKey(partitionKeyValue: true),
+                        MaxItemCount = int.MaxValue
                     }
                 ))
                 {

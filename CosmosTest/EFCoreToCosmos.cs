@@ -27,11 +27,12 @@ namespace CosmosTest.EFCore
     {
         private readonly string _cosmosDbConnectionString = "";
         private readonly string _containerId = "";
+        private readonly string _cosmosDatabaseId = "";
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder) 
             => optionsBuilder.UseCosmos(
-                _cosmosDbConnectionString, 
-                _containerId);
+                _cosmosDbConnectionString,
+                _cosmosDatabaseId);
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

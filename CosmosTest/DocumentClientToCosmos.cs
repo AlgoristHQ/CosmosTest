@@ -18,8 +18,8 @@ namespace CosmosTest.DocumentDb
             using (var client = new DocumentClient(new Uri(_endpoint), _authkey))
             {
                 results = client.CreateDocumentQuery<CosmosDocumentType>(UriFactory.CreateDocumentCollectionUri(_cosmosDatabaseId, _containerId),
-                    "SELECT c.id, c.name, c.type FROM c", new FeedOptions { PartitionKey = new PartitionKey("isSaleable") })
-                    .Select(x => new CosmosDocumentType() { Id = x.Id, Name = x.Name, Type = x.Type }).ToList();
+                    "SELECT c.id, c.name, c.type FROM c", new FeedOptions { PartitionKey = new PartitionKey(true) })
+                    .ToList();
             }
             return results;
         }
